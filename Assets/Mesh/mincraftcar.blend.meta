@@ -1,0 +1,460 @@
+fileFormatVersion: 2
+guid: d3b73879efdcb57478bf63bba1ac465f
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: armL
+    100002: armL_001
+    100004: armR
+    100006: armR_001
+    100008: body
+    100010: head
+    100012: legL
+    100014: legL_001
+    100016: legR
+    100018: legR_001
+    100020: //RootNode
+    100022: minecraft
+    100024: minecraftmesh
+    400000: armL
+    400002: armL_001
+    400004: armR
+    400006: armR_001
+    400008: body
+    400010: head
+    400012: legL
+    400014: legL_001
+    400016: legR
+    400018: legR_001
+    400020: //RootNode
+    400022: minecraft
+    400024: minecraftmesh
+    4300000: minecraftmesh
+    7400000: Default Take
+    7400002: climb
+    7400004: grab
+    7400006: Idle
+    7400008: jump
+    7400010: kill
+    7400012: run
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: minecraftmesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: -1
+      lastFrame: 219
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: climb
+      takeName: climb
+      firstFrame: 119
+      lastFrame: 149
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: grab
+      takeName: grab
+      firstFrame: 199
+      lastFrame: 220
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 99
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: jump
+      takeName: jump
+      firstFrame: 179
+      lastFrame: 199
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: kill
+      takeName: kill
+      firstFrame: 149
+      lastFrame: 179
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: run
+      takeName: run
+      firstFrame: -1
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: minecraft
+        weight: 1
+      - path: minecraft/body
+        weight: 1
+      - path: minecraft/body/armL
+        weight: 1
+      - path: minecraft/body/armL/armL_001
+        weight: 1
+      - path: minecraft/body/armR
+        weight: 1
+      - path: minecraft/body/armR/armR_001
+        weight: 1
+      - path: minecraft/body/head
+        weight: 1
+      - path: minecraft/body/legL
+        weight: 1
+      - path: minecraft/body/legL/legL_001
+        weight: 1
+      - path: minecraft/body/legR
+        weight: 1
+      - path: minecraft/body/legR/legR_001
+        weight: 1
+      - path: minecraftmesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
