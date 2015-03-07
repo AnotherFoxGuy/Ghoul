@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 var mat: Material;
 
 var fadeTime = 1.0;
@@ -31,4 +31,9 @@ function Fademat(curentmat: Material, timer: float, fadeType: Fade) {
 		print("" + Mathf.Lerp(start, end, i));
 		yield;
 	}
+}
+
+function Update () {
+  if (Input.GetKeyDown (KeyCode.Escape))
+  	Application.LoadLevel(nextscene);
 }
