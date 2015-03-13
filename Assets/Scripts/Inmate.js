@@ -69,15 +69,10 @@ function Update() {
 			}
 		}
 		if (Time.time > timer && !this_rigidbody.isKinematic) {
-			var dist = 0f;
-			var closest_object = GetClosestObject("Guard");
-			if (closest_object != null) {
-				dist = Vector3.Distance(this.transform.position, closest_object.transform.position);
-			}
 			var pos_ray2 = Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
-			if (Physics.Raycast(this.transform.position, Vector3.forward, 50, layerMask) && dist > 4) {
+			if (Physics.Raycast(this.transform.position, Vector3.forward, 50, layerMask)) {
 				Cilmb(climbI.up_start);
-			} else if (Physics.Raycast(pos_ray1, Vector3.down, 5, layerMask) && dist > 4) {
+			} else if (Physics.Raycast(pos_ray1, Vector3.down, 5, layerMask)) {
 				Cilmb(climbI.down_start);
 			} else {
 				SetTimer();
@@ -183,7 +178,7 @@ function CilmbAni(climbtype: climbI) {
 		Cilmb(climbI.down_end);
 	}
 }
-
+/*
 function GetClosestObject(tag: String): GameObject {
 	var objectsWithTag = GameObject.FindGameObjectsWithTag(tag);
 	var closestObject: GameObject;
@@ -195,3 +190,4 @@ function GetClosestObject(tag: String): GameObject {
 	}
 	return closestObject;
 }
+*/

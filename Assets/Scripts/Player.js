@@ -9,7 +9,7 @@ public var idle_ani : AnimationClip;
 public var kill_ani : AnimationClip;
 public var run_ani : AnimationClip;
 public var jump_ani : AnimationClip;
-public var climbwall_ani : AnimationClip;
+public var PlayerClimbwall_ani : AnimationClip;
 public var pullup_ani : AnimationClip;
 public var descent_ani : AnimationClip;
 
@@ -24,9 +24,9 @@ private var HitPoint_down: RaycastHit;
 private var HitPoint_forward: RaycastHit;
 private var last_clip: AnimationClip;
 private var MaxSpeed = 5;
-private var is_climbing = false;
+private var is_PlayerClimbing = false;
 private var thisPos : Vector3;
-enum climb {up_start , up_mid , up_end , down_start , down_mid , down_end}
+private enum PlayerClimb {up_start , up_mid , up_end , down_start , down_mid , down_end}
 
 
 function Start() {
@@ -63,11 +63,12 @@ function Update() {
 		}
 		if (Input.GetButtonDown("Next")) {
 			var test_pos0 = Vector3(thisPos.x, thisPos.y + 100, thisPos.z + 1);
-			if (Physics.Raycast(test_pos0, Vector3.down, 300) && Physics.Raycast(thisPos, Vector3.forward, 50) && Physics.Raycast(thisPos, Vector3.down, 1.6)) Cilmb(climb.up_start);
+			if (Physics.Raycast(test_pos0, Vector3.down, 300) && Physics.Raycast(thisPos, Vector3.forward, 50) && Physics.Raycast(thisPos, Vector3.down, 1.6))
+				Cilmb(PlayerClimb.up_start);
 		}
 		if (Input.GetButtonDown("Previous")) {
 			var test_pos1 = Vector3(thisPos.x, thisPos.y, thisPos.z - 1);
-			if (Physics.Raycast(test_pos1, Vector3.down, 300) && Physics.Raycast(thisPos, Vector3.down, 1.6)) Cilmb(climb.down_start);
+			if (Physics.Raycast(test_pos1, Vector3.down, 300) && Physics.Raycast(thisPos, Vector3.down, 1.6)) Cilmb(PlayerClimb.down_start);
 		}
 		if (Input.GetButtonDown("Attach")) {
 			var one;
@@ -82,12 +83,12 @@ function Update() {
 			}
 		}
 	}
-	if (is_climbing) {
+	if (is_PlayerClimbing) {
 		var pos_test = Vector3(this.transform.position.x, this.transform.position.y + 1.5, this.transform.position.z);
 		if (!Physics.Raycast(pos_test, Vector3.forward, 1)) {
 			this.GetComponent.<Animation>().Play(idle_ani.name);
-			is_climbing = false;
-			CilmbAni(climb.up_mid);
+			is_PlayerClimbing = false;
+			CilmbAni(PlayerClimb.up_mid);
 		} else {
 			var translation = Time.deltaTime * 2;
 			transform.Translate(0, translation, 0);
@@ -117,16 +118,16 @@ function AnimateThis(CurrentClip: AnimationClip, Forced: boolean) {
 	}
 }
 
-function Cilmb(climbtype: climb) {
-	if (climbtype == climb.up_start) {
+function Cilmb(PlayerClimbtype: PlayerClimb) {
+	if (PlayerClimbtype == PlayerClimb.up_start) {
 		this_rigidbody.isKinematic = true;
 		if (Physics.Raycast(thisPos, Vector3.forward, HitPoint_forward, 50)) {
 			this.transform.position.z = HitPoint_forward.point.z - 0.5;
 			this.transform.position.y += 0.1;
 			this.transform.eulerAngles.y = 0;
-			CilmbAni(climb.up_start);
+			CilmbAni(PlayerClimb.up_start);
 		}
-	} else if (climbtype == climb.up_end) {
+	} else if (PlayerClimbtype == PlayerClimb.up_end) {
 		var pos_ray0 = Vector3(thisPos.x, thisPos.y + 100, thisPos.z + 1);
 		if (Physics.Raycast(pos_ray0, Vector3.down, HitPoint_down, 300)) {
 			this.transform.position.y = HitPoint_down.point.y;
@@ -134,7 +135,7 @@ function Cilmb(climbtype: climb) {
 			this.transform.eulerAngles.y = 90;
 			this_rigidbody.isKinematic = false;
 		}
-	} else if (climbtype == climb.down_start) {
+	} else if (PlayerClimbtype == PlayerClimb.down_start) {
 		var pos_ray2 = Vector3(thisPos.x, thisPos.y, thisPos.z - 1);
 		if (Physics.Raycast(pos_ray2, Vector3.down, HitPoint_down, 300)) {
 			Debug.DrawLine(thisPos, HitPoint_down.point);
@@ -144,30 +145,30 @@ function Cilmb(climbtype: climb) {
 				this.transform.position.y -= 1.5;
 				this_rigidbody.isKinematic = true;
 				this.transform.eulerAngles.y = 0;
-				CilmbAni(climb.down_start);
+				CilmbAni(PlayerClimb.down_start);
 
 			}
 		}
-	} else if (climbtype == climb.down_end) {
+	} else if (PlayerClimbtype == PlayerClimb.down_end) {
 		this_rigidbody.isKinematic = false;
 		this_rigidbody.AddForce(transform.TransformDirection(Vector3.up * 20));
 	}
 }
 
-function CilmbAni(climbtype: climb) {
-	if (climbtype == climb.up_start) {
-		this.GetComponent.<Animation>().Play(climbwall_ani.name);
-		is_climbing = true;
-	} else if (climbtype == climb.up_mid) {
+function CilmbAni(PlayerClimbtype: PlayerClimb) {
+	if (PlayerClimbtype == PlayerClimb.up_start) {
+		this.GetComponent.<Animation>().Play(PlayerClimbwall_ani.name);
+		is_PlayerClimbing = true;
+	} else if (PlayerClimbtype == PlayerClimb.up_mid) {
 		this.GetComponent.<Animation>().Play(pullup_ani.name);
 		yield WaitForSeconds(GetComponent.<Animation>()[pullup_ani.name].clip.length);
 		this.GetComponent.<Animation>().Play(idle_ani.name);
-		Cilmb(climb.up_end);
-	} else if (climbtype == climb.down_start) {
+		Cilmb(PlayerClimb.up_end);
+	} else if (PlayerClimbtype == PlayerClimb.down_start) {
 		this.GetComponent.<Animation>().Play(descent_ani.name);
 		yield WaitForSeconds(GetComponent.<Animation>()[descent_ani.name].clip.length);
 		this.GetComponent.<Animation>().Play(idle_ani.name);
-		Cilmb(climb.down_end);
+		Cilmb(PlayerClimb.down_end);
 	}
 }
 
@@ -199,6 +200,15 @@ function UpdateCheats() {
 }
 
 function KillThis(kill_time: float) {
+	//@TODO Add animation stuff
+	if (!GodMode && !Killed) {
+		tulr = Time.realtimeSinceStartup + 2;
+		Killed = true;
+		Time.timeScale = 0;
+	}
+}
+
+function BruteKillThis(kill_time: float) {
 	//@TODO Add animation stuff
 	if (!GodMode && !Killed) {
 		tulr = Time.realtimeSinceStartup + 2;
