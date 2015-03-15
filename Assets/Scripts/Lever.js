@@ -3,12 +3,12 @@
 private var inTrigger = false;
 var ActivateObject : GameObject;
 
-function Start () {
+function Start() {
 
 }
 
-function Update () {
-  if(inTrigger && Input.GetButtonDown ("Attach"))
+function Update() {
+	if (inTrigger && Input.GetButtonDown("Attach"))
 		ActivateObject.SendMessage("Activate");
 
 }
@@ -24,6 +24,6 @@ function OnTriggerExit(other: Collider) {
 }
 
 function OnGUI() {
-	if(inTrigger)
+	if (inTrigger)
 		GUI.Box(Rect(10, 100, 150, 50), "inTrigger");
 }

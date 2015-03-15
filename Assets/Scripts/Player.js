@@ -26,8 +26,8 @@ private var last_clip: AnimationClip;
 private var MaxSpeed = 5;
 private var is_PlayerClimbing = false;
 private var thisPos : Vector3;
-private enum PlayerClimb {up_start , up_mid , up_end , down_start , down_mid , down_end}
-
+private enum PlayerClimb {up_start , up_mid , up_end , down_start , down_mid , down_end , hang_start , hang_end}
+private var hanging = false;
 
 function Start() {
 	this_rigidbody = this.GetComponent(Rigidbody);
@@ -77,16 +77,24 @@ function Update() {
 			var pos_test1 = Vector3(this.transform.position.x, this.transform.position.y + 0.5, this.transform.position.z);
 			if (Physics.Raycast(pos_test1, Vector3(one, 0, 0), HitPoint, 2)) {
 				if (HitPoint.collider.tag == "Enemy") {
-					this.GetComponent.<Animation>().Play(kill_ani.name);
-					HitPoint.collider.SendMessage("KillThis", GetComponent.<Animation>()[descent_ani.name].clip.length);
+					this.GetComponent. < Animation > ().Play(kill_ani.name);
+					HitPoint.collider.SendMessage("KillThis", GetComponent. < Animation > ()[descent_ani.name].clip.length);
 				}
 			}
+		}
+	}
+	if (Input.GetButtonDown("MoveZOder")) {
+		if (hanging) {
+			Cilmb(PlayerClimb.hang_end);
+		} else if (Physics.Raycast(thisPos, Vector3.down, HitPoint, 1.6)) {
+			if (HitPoint.transform.tag == "hanging")
+				Cilmb(PlayerClimb.hang_start);
 		}
 	}
 	if (is_PlayerClimbing) {
 		var pos_test = Vector3(this.transform.position.x, this.transform.position.y + 1.5, this.transform.position.z);
 		if (!Physics.Raycast(pos_test, Vector3.forward, 1)) {
-			this.GetComponent.<Animation>().Play(idle_ani.name);
+			this.GetComponent. < Animation > ().Play(idle_ani.name);
 			is_PlayerClimbing = false;
 			CilmbAni(PlayerClimb.up_mid);
 		} else {
@@ -111,9 +119,9 @@ function OnGUI() {
 function AnimateThis(CurrentClip: AnimationClip, Forced: boolean) {
 	if (last_clip != CurrentClip) {
 		if (Forced)
-			this.GetComponent.<Animation>().Play(CurrentClip.name);
+			this.GetComponent. < Animation > ().Play(CurrentClip.name);
 		else
-			this.GetComponent.<Animation>().CrossFade(CurrentClip.name, 0.2);
+			this.GetComponent. < Animation > ().CrossFade(CurrentClip.name, 0.2);
 		last_clip = CurrentClip;
 	}
 }
@@ -152,22 +160,40 @@ function Cilmb(PlayerClimbtype: PlayerClimb) {
 	} else if (PlayerClimbtype == PlayerClimb.down_end) {
 		this_rigidbody.isKinematic = false;
 		this_rigidbody.AddForce(transform.TransformDirection(Vector3.up * 20));
+	} else if (PlayerClimbtype == PlayerClimb.hang_start) {
+		var pos_ray3 = Vector3(thisPos.x, thisPos.y - 1, thisPos.z - 50);
+		if (Physics.Raycast(pos_ray3, Vector3.forward, HitPoint_forward, 300)) {
+			this.transform.position.z = HitPoint_forward.point.z - 0.5;
+			this.transform.position.y -= 1.5;
+			this_rigidbody.isKinematic = true;
+			this.transform.eulerAngles.y = 0;
+			hanging = true;
+		}
+	} else if (PlayerClimbtype == PlayerClimb.hang_end) {
+		var pos_ray4 = Vector3(thisPos.x, thisPos.y + 100, thisPos.z + 1);
+		if (Physics.Raycast(pos_ray4, Vector3.down, HitPoint_down, 300)) {
+			this.transform.position.y = HitPoint_down.point.y;
+			this.transform.position.z = HitPoint_down.point.z;
+			this.transform.eulerAngles.y = 90;
+			this_rigidbody.isKinematic = false;
+			hanging = false;
+		}
 	}
 }
 
 function CilmbAni(PlayerClimbtype: PlayerClimb) {
 	if (PlayerClimbtype == PlayerClimb.up_start) {
-		this.GetComponent.<Animation>().Play(PlayerClimbwall_ani.name);
+		this.GetComponent. < Animation > ().Play(PlayerClimbwall_ani.name);
 		is_PlayerClimbing = true;
 	} else if (PlayerClimbtype == PlayerClimb.up_mid) {
-		this.GetComponent.<Animation>().Play(pullup_ani.name);
-		yield WaitForSeconds(GetComponent.<Animation>()[pullup_ani.name].clip.length);
-		this.GetComponent.<Animation>().Play(idle_ani.name);
+		this.GetComponent. < Animation > ().Play(pullup_ani.name);
+		yield WaitForSeconds(GetComponent. < Animation > ()[pullup_ani.name].clip.length);
+		this.GetComponent. < Animation > ().Play(idle_ani.name);
 		Cilmb(PlayerClimb.up_end);
 	} else if (PlayerClimbtype == PlayerClimb.down_start) {
-		this.GetComponent.<Animation>().Play(descent_ani.name);
-		yield WaitForSeconds(GetComponent.<Animation>()[descent_ani.name].clip.length);
-		this.GetComponent.<Animation>().Play(idle_ani.name);
+		this.GetComponent. < Animation > ().Play(descent_ani.name);
+		yield WaitForSeconds(GetComponent. < Animation > ()[descent_ani.name].clip.length);
+		this.GetComponent. < Animation > ().Play(idle_ani.name);
 		Cilmb(PlayerClimb.down_end);
 	}
 }

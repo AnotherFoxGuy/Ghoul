@@ -32,7 +32,7 @@ private var timer: float;
 function Start() {
 	MoveTo = MovementSpeed;
 	can_kill = Random.Range(2, 5);
-  this_rigidbody = this.GetComponent(Rigidbody);
+	this_rigidbody = this.GetComponent(Rigidbody);
 }
 
 function Update() {
@@ -42,44 +42,42 @@ function Update() {
 	}
 	var hitR: RaycastHit;
 	var hitL: RaycastHit;
-  var Enemy : GameObject;
+	var Enemy: GameObject;
 	//var pos_ray = Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
 	Physics.Raycast(this.transform.position, Vector3.right, hitR, 500);
-  Physics.Raycast(this.transform.position, Vector3.left, hitL, 500);
-	if(hitR.collider != null ){
-		if(hitR.collider.tag == "Guard")
-	    Enemy = hitR.collider.gameObject;
-	  else if(hitR.collider.tag == "Player")
-	    Enemy = hitR.collider.gameObject;
+	Physics.Raycast(this.transform.position, Vector3.left, hitL, 500);
+	if (hitR.collider != null) {
+		if (hitR.collider.tag == "Guard")
+			Enemy = hitR.collider.gameObject;
+		else if (hitR.collider.tag == "Player")
+			Enemy = hitR.collider.gameObject;
 	}
-	if(hitL.collider != null){
-    if(hitL.collider.tag  == "Guard")
-	    Enemy = hitL.collider.gameObject;
-	  else if(hitL.collider.tag  == "Player")
-	    Enemy = hitL.collider.gameObject;
+	if (hitL.collider != null) {
+		if (hitL.collider.tag == "Guard")
+			Enemy = hitL.collider.gameObject;
+		else if (hitL.collider.tag == "Player")
+			Enemy = hitL.collider.gameObject;
 	}
-	if( Enemy != null){
-    isInChase(Enemy);
+	if (Enemy != null) {
+		isInChase(Enemy);
 		//print("isInChase");
-	}
-	else if(jumpDown && Time.time > timer){
-    Cilmb(IBClimb.down_start);
-	}
-  else{
-    isNotInChase();
-    //print("isNotInChase");
+	} else if (jumpDown && Time.time > timer) {
+		Cilmb(IBClimb.down_start);
+	} else {
+		isNotInChase();
+		//print("isNotInChase");
 	}
 }
 
 function Jump() {
 	var t = MoveTo;
-  print("Jump");
+	print("Jump");
 	this_rigidbody.AddForce(transform.TransformDirection(Vector3.up * 300));
 	is_working = true;
-  MoveTo = 0;
+	MoveTo = 0;
 	yield WaitForSeconds(0.5);
 	is_working = false;
-  MoveTo = t;
+	MoveTo = t;
 }
 
 function Cilmb(IBClimbtype: IBClimb) {
@@ -121,8 +119,8 @@ function isNotInChase() {
 
 function isInChase(Enemy: GameObject) {
 	SetTimer();
-  var pos_ray = Vector3(this.transform.position.x, this.transform.position.y - 0.25, this.transform.position.z);
-  if (Physics.Raycast(pos_ray, Vector3(One, 0, 0), 0.9, layerMask) && !is_working)
+	var pos_ray = Vector3(this.transform.position.x, this.transform.position.y - 0.25, this.transform.position.z);
+	if (Physics.Raycast(pos_ray, Vector3(One, 0, 0), 0.9, layerMask) && !is_working)
 		Jump();
 	var dist = Vector3.Distance(this.transform.position, Enemy.transform.position);
 	MoveTo = MovementSpeed * 3;
@@ -140,23 +138,16 @@ function isInChase(Enemy: GameObject) {
 
 
 function CilmbAni() {
-	this.GetComponent.<Animation>().Play(descent_ani.name);
-	yield WaitForSeconds(GetComponent.<Animation>()[descent_ani.name].clip.length);
-	this.GetComponent.<Animation>().Play(idle_ani.name);
+	this.GetComponent. < Animation > ().Play(descent_ani.name);
+	yield WaitForSeconds(GetComponent. < Animation > ()[descent_ani.name].clip.length);
+	this.GetComponent. < Animation > ().Play(idle_ani.name);
 	Cilmb(IBClimb.down_end);
 }
 
 function KillThis(kill_time: float) {
-	
+
 }
 
 function SetTimer() {
 	timer = Time.time + Random.Range(3.0, 5.0);
 }
-
-
-
-
-
-
-//

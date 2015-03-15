@@ -18,7 +18,6 @@ function OnTriggerStay(otherObj: Collider) {
 		} else {
 			otherObj.transform.position.z = this.transform.position.z - reset;
 			otherObj.GetComponent(Rigidbody).isKinematic = false;
-
 		}
 	}
 }

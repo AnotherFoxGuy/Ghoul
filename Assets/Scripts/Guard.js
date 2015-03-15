@@ -36,14 +36,14 @@ function Start() {
 	MoveTo = MovementSpeed;
 	if (!NoteIcon) print("NoteIcon is empty!");
 	else {
-		var mats: Material[] = GetComponent.<Renderer>().materials;
+		var mats: Material[] = GetComponent. < Renderer > ().materials;
 		for (var i: int = 0; i < mats.length; i++) {
 			if (mats[i].name == NoteIcon.name + " (Instance)") {;
 				note_icon = new Material(NoteIcon);
 				mats[i] = note_icon;
 			}
 		}
-		GetComponent.<Renderer>().materials = mats;
+		GetComponent. < Renderer > ().materials = mats;
 	}
 }
 
