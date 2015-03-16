@@ -98,7 +98,7 @@ function Update() {
 			is_PlayerClimbing = false;
 			CilmbAni(PlayerClimb.up_mid);
 		} else {
-			var translation = Time.deltaTime * 2;
+			var translation = Time.deltaTime * 3;
 			transform.Translate(0, translation, 0);
 		}
 	}
