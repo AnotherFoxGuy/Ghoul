@@ -12,6 +12,7 @@ public var jump_ani : AnimationClip;
 public var PlayerClimbwall_ani : AnimationClip;
 public var pullup_ani : AnimationClip;
 public var descent_ani : AnimationClip;
+public var CanJump = true;
 
 private var GodModeProgress = 0;
 private var CheatDelay = 0f;
@@ -44,7 +45,7 @@ function Update() {
 		} else {
 			AnimateThis(jump_ani, true);
 		}
-		if (Input.GetButtonDown("Jump")) {
+		if (Input.GetButtonDown("Jump") && CanJump) {
 			if (Physics.Raycast(thisPos, Vector3.down, 1.6)) {
 				this_rigidbody.AddForce(transform.TransformDirection(Vector3.up * 300));
 			}
