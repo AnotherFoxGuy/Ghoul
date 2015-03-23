@@ -19,25 +19,25 @@ private var HitPoint_down: RaycastHit;
 private var HitPoint_forward: RaycastHit;
 private enum IBClimb {up_start, up_mid, up_end, down_start, down_mid, down_end}
 private var MovementSpeed = 1;
-private var MoveTo = 1;
+private var move_to = 1;
 private var One = 1;
-private var HitPoint: RaycastHit;
+private var hit_point: RaycastHit;
 //private var Enemy : GameObject;
 private var can_kill = 0;
-private var layerMask = ~ ((1 << 8) | (1 << 9) | (1 << 10));
-private var jumpDown = true;
+private var layer_mask = ~ ((1 << 8) | (1 << 9) | (1 << 10));
+private var jump_down = true;
 private var is_working = false;
 private var timer: float;
 
 function Start() {
-	MoveTo = MovementSpeed;
+	move_to = MovementSpeed;
 	can_kill = Random.Range(2, 5);
 	this_rigidbody = this.GetComponent(Rigidbody);
 }
 
 function Update() {
 	if (!this_rigidbody.isKinematic) {
-		var translation = Time.deltaTime * MoveTo;
+		var translation = Time.deltaTime * move_to;
 		transform.Translate(translation, 0, 0);
 	}
 	var hitR: RaycastHit;
@@ -61,7 +61,7 @@ function Update() {
 	if (Enemy != null) {
 		isInChase(Enemy);
 		//print("isInChase");
-	} else if (jumpDown && Time.time > timer) {
+	} else if (jump_down && Time.time > timer) {
 		Cilmb(IBClimb.down_start);
 	} else {
 		isNotInChase();
@@ -72,9 +72,9 @@ function Update() {
 function Cilmb(IBClimbtype: IBClimb) {
 	if (IBClimbtype == IBClimb.down_start) {
 		var pos_ray3 = Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
-		if (Physics.Raycast(pos_ray3, Vector3.down, HitPoint_down, 300, layerMask)) {
+		if (Physics.Raycast(pos_ray3, Vector3.down, HitPoint_down, 300, layer_mask)) {
 			var pos_ray4 = Vector3(HitPoint_down.point.x, HitPoint_down.point.y - 0.5, HitPoint_down.point.z - 100);
-			if (Physics.Raycast(pos_ray4, Vector3.forward, HitPoint_forward, 300, layerMask)) {
+			if (Physics.Raycast(pos_ray4, Vector3.forward, HitPoint_forward, 300, layer_mask)) {
 				this.transform.position.z = HitPoint_forward.point.z + 0.5;
 				this.transform.position.y -= 1.5;
 				this_rigidbody.isKinematic = true;
@@ -85,16 +85,16 @@ function Cilmb(IBClimbtype: IBClimb) {
 	} else if (IBClimbtype == IBClimb.down_end) {
 		this_rigidbody.isKinematic = false;
 		//this_rigidbody.AddForce(transform.TransformDirection(Vector3.up * 20));
-		jumpDown = false;
+		jump_down = false;
 		SetTimer();
 	}
 }
 
 function isNotInChase() {
-	MoveTo = MovementSpeed;
+	move_to = MovementSpeed;
 	var PosTMP = Vector3(this.transform.position.x + One, this.transform.position.y - 0.25, this.transform.position.z);
 	if (Physics.Raycast(this.transform.position, Vector3.down, 1)) {
-		if (!Physics.Raycast(PosTMP, Vector3.down, HitPoint, 1, layerMask) || Physics.Raycast(this.transform.position, Vector3(One, 0, 0), HitPoint, 1, layerMask)) {
+		if (!Physics.Raycast(PosTMP, Vector3.down, hit_point, 1, layer_mask) || Physics.Raycast(this.transform.position, Vector3(One, 0, 0), hit_point, 1, layer_mask)) {
 			if (One > 0) {
 				One = -1;
 				this.transform.eulerAngles.y = 180;
@@ -110,7 +110,7 @@ function isInChase(Enemy: GameObject) {
 	SetTimer();
 	var pos_ray = Vector3(this.transform.position.x, this.transform.position.y - 0.25, this.transform.position.z);
 	var dist = Vector3.Distance(this.transform.position, Enemy.transform.position);
-	MoveTo = MovementSpeed * 3;
+	move_to = MovementSpeed * 3;
 	if (this.transform.position.x > Enemy.transform.position.x) {
 		One = -1;
 		this.transform.eulerAngles.y = 180;

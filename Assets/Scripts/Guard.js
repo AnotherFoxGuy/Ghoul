@@ -9,7 +9,7 @@
 enum enemy_types {
 	Guard, GuardCaptain, GuardDog
 }
-var EnemyType :enemy_types;
+var EnemyType: enemy_types;
 var NoteIcon: Material;
 
 private var MovementSpeed = 2;
@@ -177,7 +177,7 @@ function OnGUI() {
 }
 
 function KillThis(kill_time: float) {
-	//@TODO Add animation stuff
+	//TODO: Add animation stuff
 	if (EnemyType != enemy_types.GuardCaptain) {
 		Destroy(this.gameObject, kill_time);
 		MoveTo = 0;
@@ -187,7 +187,7 @@ function KillThis(kill_time: float) {
 }
 
 function BruteKillThis(kill_time: float) {
-	//@TODO Add animation stuff
+	//TODO: Add animation stuff
 	Destroy(this.gameObject, kill_time);
 	MoveTo = 0;
 

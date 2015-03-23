@@ -26,25 +26,25 @@ private var HitPoint_down: RaycastHit;
 private var HitPoint_forward: RaycastHit;
 private var last_clip: AnimationClip;
 private var is_climbing = false;
-private var thisPos: Vector3;
+private var this_pos: Vector3;
 private var One = 1;
 private  enum climbI {
 	up_start, up_mid, up_end, down_start, down_mid, down_end
 }
-private var MovementSpeed = 3;
-private var MoveTo = 1;
+private var movement_speed = 3;
+private var move_to = 1;
 private var can_kill = 0;
 private var is_working = false;
 private var timer: float;
-private var layerMask = ~ ((1 << 8) | (1 << 9) | (1 << 10));
+private var layer_mask = ~ ((1 << 8) | (1 << 9) | (1 << 10));
 
 
 function Start() {
 	if (MoveDirection == move_directions.left) {
-		MovementSpeed = -MovementSpeed;
+		movement_speed = -movement_speed;
 		One = -One;
 	}
-	MoveTo = MovementSpeed;
+	move_to = movement_speed;
 	this_rigidbody = this.GetComponent(Rigidbody);
 	SetTimer();
 }
@@ -52,14 +52,14 @@ function Start() {
 function Update() {
 	if (is_free) {
 		if (!this_rigidbody.isKinematic) {
-			var translation = Time.deltaTime * MoveTo;
+			var translation = Time.deltaTime * move_to;
 			transform.Translate(translation, 0, 0);
 		}
 		var pos_ray0 = Vector3(this.transform.position.x, this.transform.position.y - 0.5, this.transform.position.z);
 		var pos_ray1 = Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z);
-		if (Physics.Raycast(pos_ray0, Vector3(One, 0, 0), 0.9, layerMask) && !is_working && !this_rigidbody.isKinematic) {
-			if (Physics.Raycast(pos_ray1, Vector3(One, 0, 0), 1, layerMask)) {
-				if (Physics.Raycast(this.transform.position, Vector3.forward, 50, layerMask)) {
+		if (Physics.Raycast(pos_ray0, Vector3(One, 0, 0), 0.9, layer_mask) && !is_working && !this_rigidbody.isKinematic) {
+			if (Physics.Raycast(pos_ray1, Vector3(One, 0, 0), 1, layer_mask)) {
+				if (Physics.Raycast(this.transform.position, Vector3.forward, 50, layer_mask)) {
 					Cilmb(climbI.up_start);
 				} else {
 					Cilmb(climbI.down_start);
@@ -70,9 +70,9 @@ function Update() {
 		}
 		if (Time.time > timer && !this_rigidbody.isKinematic) {
 			var pos_ray2 = Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
-			if (Physics.Raycast(this.transform.position, Vector3.forward, 50, layerMask)) {
+			if (Physics.Raycast(this.transform.position, Vector3.forward, 50, layer_mask)) {
 				Cilmb(climbI.up_start);
-			} else if (Physics.Raycast(pos_ray1, Vector3.down, 5, layerMask)) {
+			} else if (Physics.Raycast(pos_ray1, Vector3.down, 5, layer_mask)) {
 				Cilmb(climbI.down_start);
 			} else {
 				SetTimer();
@@ -80,7 +80,7 @@ function Update() {
 		}
 		if (is_climbing) {
 			var pos_test = Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-			if (!Physics.Raycast(pos_test, Vector3.forward, 1, layerMask)) {
+			if (!Physics.Raycast(pos_test, Vector3.forward, 1, layer_mask)) {
 				this.GetComponent. < Animation > ().Play(idle_ani.name);
 				is_climbing = false;
 				CilmbAni(climbI.up_mid);
@@ -99,7 +99,7 @@ function FreeInmate() {
 function KillThis(kill_time: float) {
 	//@TODO Add animation stuff
 	Destroy(this.gameObject, kill_time);
-	MoveTo = 0;
+	move_to = 0;
 }
 
 function AnimateThis(CurrentClip: AnimationClip, Forced: boolean) {
@@ -122,7 +122,7 @@ function Jump() {
 function Cilmb(climbtype: climbI) {
 	if (climbtype == climbI.up_start) {
 		this_rigidbody.isKinematic = true;
-		if (Physics.Raycast(this.transform.position, Vector3.forward, HitPoint_forward, 50, layerMask)) {
+		if (Physics.Raycast(this.transform.position, Vector3.forward, HitPoint_forward, 50, layer_mask)) {
 			this.transform.position.z = HitPoint_forward.point.z - 0.5;
 			this.transform.position.y += 0.1;
 			//this.transform.eulerAngles.y = 90;
@@ -130,7 +130,7 @@ function Cilmb(climbtype: climbI) {
 		}
 	} else if (climbtype == climbI.up_end) {
 		var pos_ray1 = Vector3(this.transform.position.x, this.transform.position.y + 100, this.transform.position.z + 1);
-		if (Physics.Raycast(pos_ray1, Vector3.down, HitPoint_down, 300, layerMask)) {
+		if (Physics.Raycast(pos_ray1, Vector3.down, HitPoint_down, 300, layer_mask)) {
 			this.transform.position.y = HitPoint_down.point.y + 1;
 			this.transform.position.z = HitPoint_down.point.z;
 			//this.transform.eulerAngles.y = 180;
@@ -140,9 +140,9 @@ function Cilmb(climbtype: climbI) {
 		}
 	} else if (climbtype == climbI.down_start) {
 		var pos_ray3 = Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
-		if (Physics.Raycast(pos_ray3, Vector3.down, HitPoint_down, 300, layerMask)) {
+		if (Physics.Raycast(pos_ray3, Vector3.down, HitPoint_down, 300, layer_mask)) {
 			var pos_ray4 = Vector3(HitPoint_down.point.x, HitPoint_down.point.y - 0.5, HitPoint_down.point.z - 100);
-			if (Physics.Raycast(pos_ray4, Vector3.forward, HitPoint_forward, 300, layerMask)) {
+			if (Physics.Raycast(pos_ray4, Vector3.forward, HitPoint_forward, 300, layer_mask)) {
 				this.transform.position.z = HitPoint_forward.point.z + 0.5;
 				this.transform.position.y -= 1.5;
 				this_rigidbody.isKinematic = true;
